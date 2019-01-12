@@ -1,0 +1,20 @@
+__global__  dot_vec(const double *rvec, const double *zvec, const double *pvec,  const double *qvec )
+{
+    double x = rvec[blockID.x*BlockDim.x+threadId.x] ; 
+    double y = zvec[blockID.x*BlockDim.x+threadId.x] ;  
+    double z = pvec[blockID.x*BlockDim.x+threadId.x] ;  
+    double w = qvec[blockID.x*BlockDim.x+threadId.x] ;  
+    
+    z = z*w; 
+    x = x*y;
+    __shared__ temp1[128 / 32] ; 
+    __shared__ temp2[128 / 32] ;
+    unsigned MASK= ;
+ #pragma unroll 
+    for(int offset=16;offset>0;offset/=2)
+    {
+    __shfl_down_sync(x,); 
+    __shfl_down_sync(z,); 
+    }
+    
+}
